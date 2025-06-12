@@ -1,38 +1,33 @@
-# 🧠 LangChain-Powered Customer Sentiment Analyzer
+# 🛍️ LangChain Customer Sentiment Analyzer
 
-A LangChain project that leverages LLMs to analyze customer emails from a fictional mega retail brand — **BuyBuy** — and determine:
-
-- 📦 Which **product category** has the most negative sentiment
-- 🏪 Which **store location** receives the most complaints
+This project uses **LangChain** and **LLMs** to extract insights from synthetic customer emails at a fictional mega retail store — **BuyBuy**.
 
 ---
 
-## 🚀 Use Case
+## 📌 Use Case
 
-Retail businesses receive tons of unstructured feedback via customer emails. Manually analyzing and classifying these is time-consuming and error-prone. We use **LLMs + prompt engineering** to automate:
+Retail chains receive thousands of customer feedback emails. The goal is to extract structured insights from these emails using **prompt engineering** with a language model.
 
-- Sentiment analysis
-- Product category classification
-- Complaint frequency detection
-- Insight extraction from natural language
+We aim to answer:
+
+1. What **product category** receives the most **negative feedback**?
+2. Which **store location** has the most **customer complaints**?
 
 ---
 
 ## ❓ Problem Statement
 
-> Given 10 synthetic customer emails from BuyBuy stores:
->
-> - Identify negative sentiment emails
-> - Map the product mentioned to a broader category (e.g., "shirt" → "clothing")
-> - Track which store location is most often associated with complaints
->
-> Then, return:
-> ```json
-> {
->   "most_complained_category": "...",
->   "most_complained_location": "..."
-> }
-> ```
+Each email may:
+
+- Praise or criticize a product
+- Mention a specific item (e.g., "blue sofa", "laptop stand")
+- Include a store location
+
+We leverage an LLM to:
+
+- Understand sentiment from free-text
+- Infer the **category** of each product (e.g., electronics, furniture, clothing)
+- Aggregate and summarize insights
 
 ---
 
@@ -45,6 +40,30 @@ Retail businesses receive tons of unstructured feedback via customer emails. Man
 
 ---
 
+## 🧪 How It Works
+
+1. Load 10 customer emails from `data/emails.json`
+2. Feed the entire list into the LLM with a custom prompt
+3. LLM analyzes sentiment and categorizes complaints
+4. Final output:
+
+```json
+   {
+     "most_complained_category": "furniture",
+     "most_complained_location": "Chicago"
+   }
+```
+
+## ▶️ Run It
+
+```bash
+# Clone and run
+git clone <this-project>
+cd langchain-customer-sentiment-analysis
+pip install -r requirements.txt
+python app/chain.py
+```
+
 ## ✅ Output Example
 
 ```json
@@ -52,3 +71,23 @@ Retail businesses receive tons of unstructured feedback via customer emails. Man
   "most_complained_category": "furniture",
   "most_complained_location": "Chicago"
 }
+```
+
+## 🌟 Results
+
+✅ Successfully identifies complaints using LLM-based reasoning, not rule-based filters
+
+✅ Categorizes natural language products into broader semantic groups
+
+✅ Provides actionable insight to businesses on what and where to improve
+
+## Build with
+
+- [LangChain](https://www.langchain.com/)
+- [Nvidia Inference API](https://catalog.ngc.nvidia.com/)
+- [Pydantic](https://docs.pydantic.dev/latest/)
+- [JsonOutputParser](https://python.langchain.com/docs/concepts/output_parsers/)
+
+## 🤝 Contribution
+
+Pull requests welcome! If you’d like to extend this with a UI (e.g., Streamlit) or an API (e.g., FastAPI), feel free to fork and build on it.
